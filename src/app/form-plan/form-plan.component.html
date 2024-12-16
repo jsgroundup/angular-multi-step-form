@@ -1,0 +1,35 @@
+<h1>Select your plan</h1>
+<p>You have the option of monthly or yearly billing.</p>
+
+<div class="plan-card-container">
+
+  <div role="button" tabindex="0" (keyup)="onItemClickedWithKeyboard($event, 'arcade')" (click)="onCategoryClick('arcade')" role="button" tabindex="0" class="plan-card {{appStoreService.planCategory==='arcade'&&'selected'}}">
+    <div class="plan-card-image-container"> <img src="../../assets/images/icon-arcade.svg" alt="Arcade icon"/> </div>
+    <div class="plan-card-info">
+      <div class="plan-card-title">Arcade</div>
+      <div class="plan-card-price">${{prices[appStoreService.planType].arcade}}/mo</div>
+    </div>
+  </div>
+
+  <div role="button" tabindex="0" (keyup)="onItemClickedWithKeyboard($event, 'advanced')" (click)="onCategoryClick('advanced')" role="button" tabindex="0" class="plan-card {{appStoreService.planCategory==='advanced'&&'selected'}}">
+    <div class="plan-card-image-container"> <img src="../../assets/images/icon-advanced.svg" alt="Advanced icon"/> </div>
+    <div class="plan-card-info">
+      <div class="plan-card-title">Advanced</div>
+      <div class="plan-card-price">${{prices[appStoreService.planType].advanced}}/mo</div>
+    </div>
+  </div>
+
+  <div role="button" tabindex="0" (keyup)="onItemClickedWithKeyboard($event, 'pro')" (click)="onCategoryClick('pro')" role="button" tabindex="0" class="plan-card {{appStoreService.planCategory==='pro'&&'selected'}}">
+    <div class="plan-card-image-container"> <img src="../../assets/images/icon-pro.svg" alt="Pro icon"/> </div>
+    <div class="plan-card-info">
+      <div class="plan-card-title">Pro</div>
+      <div class="plan-card-price">${{prices[appStoreService.planType].pro}}/mo</div>
+    </div>
+  </div>
+
+  <div class="time-selection">
+    <div [class]="appStoreService.planType==='yearly'?'inactive':''">Monthly</div>
+    <div role="button" tabindex="0" (keyup)="onItemToggledWithKeyboard($event)" (click)="onToggle()" class="switch-container {{appStoreService.planType==='yearly'?'yearly-on':'yearly-off'}}"><div class="switch"></div></div>
+    <div [class]="appStoreService.planType==='monthly'?'inactive':''">Yearly</div>
+  </div>
+

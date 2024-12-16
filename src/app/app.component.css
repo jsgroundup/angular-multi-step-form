@@ -1,0 +1,86 @@
+main{
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+
+}
+
+.content{
+  max-width: 600px;
+  width: 100%;
+}
+
+.bottom-nav-controller-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  background-color: #ffffff;
+  z-index: 5;
+  width: calc(100% - 314px);
+  margin-left: 314px;
+}
+
+.bottom-nav-controller{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+button{
+  background-color: #022959;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  text-transform: capitalize;
+  font-weight: bold;
+  cursor: pointer;
+  width: 130px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+button.primary:hover{
+  background-color: #164A8A;
+}
+
+button.confirm{
+  background-color: #483EFF;
+}
+
+button.confirm:hover{
+  background-color: #928CFF;
+}
+
+button.final{
+  background-color: transparent;
+  color: #928CFF;
+}
+
+button.plain{
+  background-color: transparent;
+  color: #9699AA;
+  align-items: flex-start;
+}
+
+button.plain:hover{
+  color: #022959;
+}
+
+@media screen and (max-width: 900px) {
+  .bottom-nav-controller-container{
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 15px;
+    padding-right:15px;
+  }
+
+}

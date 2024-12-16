@@ -1,0 +1,98 @@
+:host{
+  max-width: 600px;
+  width: 100%;
+}
+
+h1{
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+p{
+  color: #9699AA;
+  font-size: 15px;
+  margin-bottom: 35px;
+}
+
+.plan-card-container{
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
+  flex-flow: wrap;
+  cursor: pointer;
+}
+
+
+.plan-card{
+  padding: 16px 12px;
+  background-color: #ffffff;
+  height: 81px;
+  width: 100%;
+  margin: 0px 6px;
+  border: 2px solid #dddfe867;
+  border-radius: 8px;
+  justify-content: space-between;
+  flex-direction: row;
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.plan-card:hover{
+  border: 2px solid #483EFF;
+}
+
+.plan-card.selected{
+  background-color: #F8F9FF;
+  border: 2px solid #483EFF;
+}
+
+.left-group{
+  display: flex;
+  align-items: center;
+}
+
+.checker{
+  width: 33px;
+  height: 33px;
+  border: 2px solid #dddfe867;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px 0 15px;
+}
+
+.selected .checker{
+  background-color: #483EFF;
+  border: 2px solid #483EFF;
+}
+
+.checker img{
+  display: none;
+  width: 60%;
+  height: 60%;
+}
+
+.selected .checker img{
+  display: block;
+}
+
+.plan-card-title{
+  color: #022959;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.plan-card-desc{
+  color: #9699AA;
+  font-size: 14px;
+}
+
+.plan-card-price{
+  color: #483EFF;
+  font-size: 14px;
+}

@@ -1,0 +1,54 @@
+:host{
+  max-width: 600px;
+  width: 100%;
+}
+
+h1{
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+p{
+  color: #9699AA;
+  font-size: 15px;
+  margin-bottom: 35px;
+}
+
+
+label{
+  display: block;
+  margin-bottom: 35px;
+  font-size: 15px;
+  color: #022959;
+}
+
+input{
+  border: 2px solid #dddfe867;
+  padding: 10px 15px;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
+  outline: none;
+  color: #022959;
+}
+
+input:focus{
+  border: 2px solid #483EFF;
+}
+
+input.warn{
+  border: 2px solid #EE374A;
+}
+
+.name-container{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.error{
+  color: #EE374A;
+  font-size: 12px;
+}
+

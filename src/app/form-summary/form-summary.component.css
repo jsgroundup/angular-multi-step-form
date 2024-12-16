@@ -1,0 +1,134 @@
+:host{
+  max-width: 600px;
+  width: 100%;
+}
+
+h1{
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+p{
+  color: #9699AA;
+  font-size: 15px;
+  margin-bottom: 35px;
+}
+
+.plan-card-container{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+
+.plan-card{
+  padding: 20px;
+  background-color: #ffffff;
+  width: 100%;
+  margin: 0px 6px;
+  border-radius: 8px;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: 20px;
+  align-items: center;
+  cursor: pointer;
+  background-color: #F8F9FF;
+}
+
+.left-group{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 25px;
+  border-bottom: 2px solid #dddfe867;
+
+}
+
+.left-group.no-addons{
+  padding-bottom: 0px;
+  border-bottom: 0px solid transparent;
+}
+
+.change-button{
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.change-button:hover{
+  color: #483EFF;
+  text-decoration: underline;
+}
+
+.add-ons{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0px;
+}
+
+.checker{
+  width: 33px;
+  height: 33px;
+  border: 2px solid #dddfe867;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px 0 15px;
+}
+
+.selected .checker{
+  background-color: #483EFF;
+  border: 2px solid #483EFF;
+}
+
+.checker img{
+  display: none;
+  width: 60%;
+  height: 60%;
+}
+
+.selected .checker img{
+  display: block;
+}
+
+.plan-card-title{
+  color: #022959;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+button.change{
+  color: #9699AA;
+}
+button.change :hover{
+  color: #483EFF;
+}
+
+.plan-card-desc{
+  color: #9699AA;
+  font-size: 14px;
+}
+
+.plan-card-price{
+  color: #022959;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+
+.final-message{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 15%;
+  padding-bottom: 15%;
+}

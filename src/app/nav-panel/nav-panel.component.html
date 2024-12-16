@@ -1,0 +1,43 @@
+<div role="navigation" class="form-navigation">
+
+  <div role="button" tabindex="0" (keyup)="onItemSelectedWithKeyboard($event, SELECTIONS.INFO)" (click)="select(SELECTIONS.INFO)" class="navigation-step {{appStoreService.getSelectedPageNumber()===SELECTIONS.INFO&&'selected'}}">
+    <div class="navigation-point-container flex-center">
+      <div class="navigation-point flex-center"> <span> 1 </span> </div>
+    </div>
+    <div class="navigation-step-info">
+      <div class="navigation-step-count">Step 1</div>
+      <div class="navigation-step-name">Your Info</div>
+    </div>
+  </div>
+
+  <div role="button" tabindex="0" (keyup)="onItemSelectedWithKeyboard($event, SELECTIONS.PLAN)" (click)="select(SELECTIONS.PLAN)" class="navigation-step {{appStoreService.getSelectedPageNumber()===SELECTIONS.PLAN&&'selected'}}">
+    <div class="navigation-point-container flex-center">
+      <div class="navigation-point flex-center"> <span> 2 </span> </div>
+    </div>
+    <div class="navigation-step-info">
+      <div class="navigation-step-count">Step 2</div>
+      <div class="navigation-step-name">Select plan</div>
+    </div>
+  </div>
+
+  <div role="button" tabindex="0" (keyup)="onItemSelectedWithKeyboard($event, SELECTIONS.ADDONS)" (click)="select(SELECTIONS.ADDONS)" class="navigation-step {{appStoreService.getSelectedPageNumber()===SELECTIONS.ADDONS&&'selected'}}">
+    <div class="navigation-point-container flex-center">
+      <div class="navigation-point flex-center"> <span> 3 </span> </div>
+    </div>
+    <div class="navigation-step-info">
+      <div class="navigation-step-count">Step 3</div>
+      <div class="navigation-step-name">Add-ons</div>
+    </div>
+  </div>
+
+  <div role="button" tabindex="0" (keyup)="onItemSelectedWithKeyboard($event, SELECTIONS.SUMMARY)" (click)="select(SELECTIONS.SUMMARY)" class="navigation-step {{appStoreService.getSelectedPageNumber()===SELECTIONS.SUMMARY&&'selected'}}">
+    <div class="navigation-point-container flex-center">
+      <div class="navigation-point flex-center"> <span> 4 </span> </div>
+    </div>
+    <div class="navigation-step-info">
+      <div class="navigation-step-count">Step 4</div>
+      <div class="navigation-step-name">Summary</div>
+    </div>
+  </div>
+
+</div>

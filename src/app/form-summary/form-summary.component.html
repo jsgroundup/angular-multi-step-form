@@ -1,0 +1,45 @@
+
+@if(!appStoreService.detailsConfirmed){
+
+
+
+  <h1>Finishing up</h1>
+  <p>Double-check everything looks OK before confirming.</p>
+
+  <div class="plan-card-container">
+
+    <div class="plan-card">
+      <div class="left-group {{selectedAddons.length<1&&'no-addons'}}">
+        <div class="plan-card-info">
+          <div style="text-transform: capitalize;" class="plan-card-title">{{appStoreService.planCategory}} ({{appStoreService.planType}})</div>
+          <button class="plan-card-desc change-button">Change</button>
+        </div>
+        <div class="plan-card-price">+${{selectedPlanPrice}}/mo</div>
+      </div>
+
+      @for (item of selectedAddons; track item.title) {
+        <div class="add-ons">
+          <div class="plan-card-desc">{{item.title}}</div>
+          <div class="plan-card-price" style="font-weight: 400;">+${{appStoreService.planType==='monthly'?item.price:item.price*10}}/mo</div>
+        </div>
+      }
+    </div>
+
+    <div class="add-ons" style="justify-content: space-between;margin: 0 25px;">
+      <div class="plan-card-desc">Total (per {{appStoreService.planType.slice(0, appStoreService.planType.length-2)}})</div>
+      <div class="plan-card-price" style="color: #483EFF;font-size: 20px;" >+${{totalPrice}}/mo</div>
+    </div>
+
+  </div>
+
+}
+@else {
+  <div class="final-message">
+      <img style="display: block;" src="../../assets/images/icon-thank-you.svg" alt="">
+      <h1>Thank you!</h1>
+      <p style="text-align: center;max-width: 500px;">
+        Thanks for confirming your subscription! We hope you have fun using our platform.
+        If you ever need support, please feel free to email us at support{{'@'}}loremgaming.com.
+      </p>
+  </div>
+}

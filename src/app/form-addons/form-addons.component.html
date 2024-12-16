@@ -1,0 +1,23 @@
+<h1>Pick add-ons</h1>
+<p>Add-ons help enhance your gaming experience.</p>
+
+<div class="plan-card-container">
+
+  @for (item of addons; track item.title) {
+    <div (keyup)="onItemSelectedWithKeyboard($event, $index)" (click)="onItemSelected($index)" role="button" tabindex="0" class="plan-card {{item.selected&&'selected'}}">
+      <div class="left-group">
+        <div class="checker">
+          <img src="../../assets/images/icon-checkmark.svg" aria-hidden="true" alt="Check mark icon" />
+        </div>
+        <div class="plan-card-info">
+          <div class="plan-card-title">{{item.title}}</div>
+          <div class="plan-card-desc">{{item.desc}}</div>
+        </div>
+      </div>
+
+      <div class="plan-card-price">+${{appStoreService.planType==='monthly'?item.price:item.price*10}}/mo</div>
+    </div>
+  }
+</div>
+
+
