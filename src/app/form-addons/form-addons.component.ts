@@ -9,7 +9,10 @@ import { AppstoreService } from '../services/appstore.service';
   templateUrl: './form-addons.component.html',
   styleUrl: './form-addons.component.css'
 })
-export class FormAddonsComponent{
+export class FormAddonsComponent implements OnInit{
+  ngOnInit(): void {
+    this.appStoreService.selected = 3;
+  }
   appStoreService = inject(AppstoreService)
 
   get addons(){

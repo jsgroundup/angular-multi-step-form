@@ -24,8 +24,9 @@ export class NavPanelComponent {
     this.SELECTIONS = this.appStoreService.SELECTIONS
     this.pathnames = Object.keys(this.appStoreService.PATHNAMES) as typeof this.pathnames
   }
+
   select(selection: SELECTION[keyof SELECTION]){
-    this.router.navigate([this.pathnames[selection]])
+    this.appStoreService.navigateTo(selection, true);
   }
 
   onItemSelectedWithKeyboard(e: KeyboardEvent, selection: SELECTION[keyof SELECTION]){

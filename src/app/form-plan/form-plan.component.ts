@@ -9,7 +9,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './form-plan.component.html',
   styleUrl: './form-plan.component.css'
 })
-export class FormPlanComponent{
+export class FormPlanComponent implements OnInit{
+  ngOnInit(): void {
+    this.appStoreService.selected = 2;
+  }
 
   appStoreService = inject(AppstoreService)
 

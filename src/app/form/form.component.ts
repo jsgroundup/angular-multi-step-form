@@ -1,10 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormInfoComponent } from "../form-info/form-info.component";
 import { AppstoreService } from '../services/appstore.service';
-import { FormPlanComponent } from "../form-plan/form-plan.component";
-import { FormAddonsComponent } from "../form-addons/form-addons.component";
-import { FormSummaryComponent } from "../form-summary/form-summary.component";
 import { RouterOutlet } from '@angular/router';
 
 @Component({

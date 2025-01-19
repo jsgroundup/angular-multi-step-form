@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AppstoreService } from '../services/appstore.service';
 
 @Component({
@@ -10,7 +10,10 @@ import { AppstoreService } from '../services/appstore.service';
   styleUrl: './form-summary.component.css'
 })
 
-export class FormSummaryComponent{
+export class FormSummaryComponent implements OnInit{
+  ngOnInit(): void {
+    this.appStoreService.selected = 4;
+  }
   appStoreService = inject(AppstoreService)
 
   get selectedAddons(){

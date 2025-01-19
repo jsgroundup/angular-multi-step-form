@@ -1,6 +1,6 @@
 import { createReducer, createSelector, on } from '@ngrx/store';
 import { getSelectedPageNumber, saveToLocalStorage } from './appstore.actions';
-import { AppStore, AppstoreService, PATHNAMES, SELECTIONS, URLPathname } from '../services/appstore.service';
+import { AppStore, PATHNAMES, SELECTIONS, URLPathname } from '../services/appstore.service';
 
 export const initialState: AppStore = {
   SELECTIONS : SELECTIONS,
@@ -37,33 +37,9 @@ export const initialState: AppStore = {
   ]
 };
 
-export class AppReducers extends AppstoreService {
 
-  appStoreReducer = createReducer(
-    initialState,
-    on(saveToLocalStorage, (state=>{
+export const appStoreReducer = createReducer(
+  initialState,
+);
 
-      const userinfo = this.userPersonalInfo().getRawValue();
-      const data = {
-        planCategory: this.planCategory,
-        planType: this.planType,
-        info: {
-          name: userinfo.name||'',
-          email: userinfo.email||'',
-          phone: userinfo.phone||''
-        }
-      }
-
-      return {...state, ...data}
-    })),
-  );
-
-  appStoreSelector = createSelector({
-    query: getSelectedPageNumber,
-    store: (state)=>{
-      let url: URLPathname = this.router.url.toLowerCase() as any;
-      return this.PATHNAMES[url]||this.SELECTIONS.INFO
-    }
-  })
-}
 

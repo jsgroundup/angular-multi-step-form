@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { NavPanelComponent } from "./nav-panel/nav-panel.component";
 import { FormComponent } from "./form/form.component";
 import { AppstoreService } from './services/appstore.service';
@@ -16,37 +15,46 @@ export class AppComponent {
   appStoreService = inject(AppstoreService)
 
   onBack(){
-    const {SELECTIONS} = this.appStoreService
+    const {SELECTIONS} = this.appStoreService;
+    let backTo = this.appStoreService.selected;
     switch (this.appStoreService.selected) {
       case SELECTIONS.SUMMARY:
-        this.appStoreService.selected = SELECTIONS.ADDONS
+        backTo = SELECTIONS.ADDONS
         break;
       case SELECTIONS.ADDONS:
-        this.appStoreService.selected = SELECTIONS.PLAN
+        backTo = SELECTIONS.PLAN
         break;
       case SELECTIONS.PLAN:
-        this.appStoreService.selected = SELECTIONS.INFO
+        backTo = SELECTIONS.INFO
         break;
     }
-    this.appStoreService.saveToLocalStorage()
+    this.appStoreService.navigateTo(backTo);
   }
   onNext(){
-    const {SELECTIONS} = this.appStoreService
+    const {SELECTIONS} = this.appStoreService;
+    let moveTo = this.appStoreService.selected;
     switch (this.appStoreService.selected) {
       case SELECTIONS.INFO:
-        this.appStoreService.selected = SELECTIONS.PLAN
+        moveTo = SELECTIONS.PLAN
         break;
       case SELECTIONS.PLAN:
-        this.appStoreService.selected = SELECTIONS.ADDONS
+        moveTo = SELECTIONS.ADDONS
         break;
       case SELECTIONS.ADDONS:
-        this.appStoreService.selected = SELECTIONS.SUMMARY
+        moveTo = SELECTIONS.SUMMARY
         break;
     }
-    this.appStoreService.saveToLocalStorage()
+    this.appStoreService.navigateTo(moveTo);
   }
 
   onConfirm(){
+    if (
+      this.appStoreService.formInfoHasErrors()
+    ) {
+      this.appStoreService.navigateTo(this.appStoreService.SELECTIONS.INFO);
+      return; // Form info has errors
+    }
+
     this.appStoreService.detailsConfirmed = true
     this.appStoreService.saveToLocalStorage()
   }
