@@ -1,5 +1,5 @@
 import { createReducer, createSelector, on } from '@ngrx/store';
-import { setSelectedPageNumber, saveToLocalStorage, setPlanCategory, setPlanType } from './appstore.actions';
+import { setSelectedPageNumber, saveToLocalStorage, setPlanCategory, setPlanType, setAddon } from './appstore.actions';
 import { AppStore, PATHNAMES, SELECTIONS, URLPathname } from '../services/appstore.service';
 
 export const initialState: AppStore = {
@@ -52,6 +52,15 @@ export const appStoreReducer = createReducer(
   }),
   on(setPlanType, (state, {planType}) => {
     return {...state, planType: planType}
+  }),
+  on(setAddon, (state, {index, selected}) => {
+    const newAddons = state.addons.map((addon, i) => {
+      if (i === index) {
+        return {...addon, selected: selected}
+      }
+      return addon
+    })
+    return {...state, addons: newAddons}
   })
 );
 

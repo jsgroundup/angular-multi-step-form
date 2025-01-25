@@ -8,3 +8,5 @@ export const setPlanCategory = createAction(
 );
 
 export const setPlanType = createAction('[APPSTORE] set plan type', props<{ planType: 'monthly' | 'yearly' }>());
+
+export const setAddon = createAction('[APPSTORE] set addon', props<{ index: number, selected: boolean }>());

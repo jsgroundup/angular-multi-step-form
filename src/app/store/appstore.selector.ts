@@ -27,3 +27,15 @@ export const planTypeSelector = createSelector(
   storeSelector,
   (state) => state.planType
 );
+
+
+export const addonsSelector = createSelector(
+  storeSelector,
+  (state) => state.addons
+)
+
+
+export const pricesSelector = createSelector(
+  storeSelector,
+  (state) => state.prices
+)
