@@ -1,5 +1,4 @@
 import { createSelector } from "@ngrx/store";
-import { getSelectedPageNumber } from "./appstore.actions";
 import { AppStore, URLPathname } from "../services/appstore.service";
 
 interface BIGSTORE{
@@ -12,4 +11,19 @@ const storeSelector = (store: BIGSTORE) => store.appdata
 export const appStoreSelector = createSelector(
   storeSelector,
   (state) => state
+);
+
+export const selectedPageSelector = createSelector(
+  storeSelector,
+  (state) => state.selected
+);
+
+export const planCategorySelector = createSelector(
+  storeSelector,
+  (state) => state.planCategory
+);
+
+export const planTypeSelector = createSelector(
+  storeSelector,
+  (state) => state.planType
 );

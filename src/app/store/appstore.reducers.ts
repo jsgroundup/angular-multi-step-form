@@ -1,5 +1,5 @@
 import { createReducer, createSelector, on } from '@ngrx/store';
-import { getSelectedPageNumber, saveToLocalStorage } from './appstore.actions';
+import { setSelectedPageNumber, saveToLocalStorage, setPlanCategory, setPlanType } from './appstore.actions';
 import { AppStore, PATHNAMES, SELECTIONS, URLPathname } from '../services/appstore.service';
 
 export const initialState: AppStore = {
@@ -40,6 +40,19 @@ export const initialState: AppStore = {
 
 export const appStoreReducer = createReducer(
   initialState,
+  on(saveToLocalStorage, (state) => {
+    localStorage.setItem('appstore', JSON.stringify(state));
+    return state;
+  }),
+  on(setSelectedPageNumber, (state, {selected}) => {
+    return {...state, selected: selected}
+  }),
+  on(setPlanCategory, (state, {category}) => {
+    return {...state, planCategory: category}
+  }),
+  on(setPlanType, (state, {planType}) => {
+    return {...state, planType: planType}
+  })
 );
 
 
