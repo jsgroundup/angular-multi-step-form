@@ -7,31 +7,31 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [],
   templateUrl: './nav-panel.component.html',
-  styleUrl: './nav-panel.component.css'
+  styleUrl: './nav-panel.component.css',
 })
-
 export class NavPanelComponent {
-  appStoreService = inject(AppstoreService)
+  appStoreService = inject(AppstoreService);
+  router = inject(Router);
+  SELECTIONS!: SELECTION;
+  pathnames!: (keyof typeof this.appStoreService.PATHNAMES)[];
 
-  router = inject(Router)
-
-  SELECTIONS!: SELECTION
-
-  pathnames!: (keyof typeof this.appStoreService.PATHNAMES)[]
-
-  // Methods
-  constructor(){
-    this.SELECTIONS = this.appStoreService.SELECTIONS
-    this.pathnames = Object.keys(this.appStoreService.PATHNAMES) as typeof this.pathnames
+  constructor() {
+    this.SELECTIONS = this.appStoreService.SELECTIONS;
+    this.pathnames = Object.keys(
+      this.appStoreService.PATHNAMES
+    ) as typeof this.pathnames;
   }
 
-  select(selection: SELECTION[keyof SELECTION]){
+  select(selection: SELECTION[keyof SELECTION]) {
     this.appStoreService.navigateTo(selection, true);
   }
 
-  onItemSelectedWithKeyboard(e: KeyboardEvent, selection: SELECTION[keyof SELECTION]){
-    if(e.key.toLowerCase()==='enter'){
-      this.select(selection)
+  onItemSelectedWithKeyboard(
+    e: KeyboardEvent,
+    selection: SELECTION[keyof SELECTION]
+  ) {
+    if (e.key.toLowerCase() === 'enter') {
+      this.select(selection);
     }
   }
 }

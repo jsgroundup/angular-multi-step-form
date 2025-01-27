@@ -11,9 +11,7 @@ import { AppstoreService } from '../services/appstore.service';
 })
 
 export class FormSummaryComponent implements OnInit{
-  ngOnInit(): void {
-    this.appStoreService.selected = 4;
-  }
+
   appStoreService = inject(AppstoreService)
 
   get selectedAddons(){
@@ -26,5 +24,9 @@ export class FormSummaryComponent implements OnInit{
 
   get selectedPlanPrice(){
     return this.appStoreService.prices[this.appStoreService.planType][this.appStoreService.planCategory]
+  }
+
+  ngOnInit(): void {
+    this.appStoreService.selected = 4;
   }
 }

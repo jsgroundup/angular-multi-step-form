@@ -1,7 +1,9 @@
 
 <main>
+
   <navigation />
   <formcontent />
+
   <div *ngIf="!appStoreService.detailsConfirmed" class="bottom-nav-controller-container">
     <div class="content bottom-nav-controller">
       <button (click)="onBack()" *ngIf="appStoreService.getSelectedPageNumber()!==appStoreService.SELECTIONS.INFO" class="plain">Go Back</button>

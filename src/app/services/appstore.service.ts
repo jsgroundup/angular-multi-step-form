@@ -1,6 +1,9 @@
 import { inject, Injectable, signal, Signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { setPlanCategory, setPlanType, setSelectedPageNumber } from '../store/appstore.actions';
+import { appStoreSelector, BIGSTORE, selectedPageSelector } from '../store/appstore.selector';
 
 export const SELECTIONS = {INFO: 1, PLAN: 2, ADDONS: 3, SUMMARY: 4}
 
@@ -18,7 +21,24 @@ export const PATHNAMES: Record<URLPathname, number> = {
   providedIn: 'root',
 })
 export class AppstoreService {
-  constructor() {
+  router = inject(Router);
+  isAboutLeavingPage = false;
+  detailsConfirmed = false;
+  SELECTIONS = SELECTIONS;
+  PATHNAMES = PATHNAMES;
+  prices!: AppStore['prices'];
+  addons!: AppStore['addons'];
+
+  constructor(private store: Store<BIGSTORE>) {
+    this.store.select(appStoreSelector).subscribe((state) => {
+      this._selected = state.selected;
+      this._planCategory = state.planCategory;
+      this._planType = state.planType;
+      this.prices = state.prices;
+      this.addons = state.addons;
+
+    });
+
     // Read form progress from local storage and resume from where user left
     try {
       let storedProgress = window.localStorage.getItem('formdata');
@@ -26,8 +46,7 @@ export class AppstoreService {
         const progress = JSON.parse(storedProgress) as AppstoreService & {
           info: FormValue;
         };
-        this.planCategory = progress.planCategory;
-        this.planType = progress.planType;
+
         this.userPersonalInfo().controls.name.setValue(progress.info.name);
         this.userPersonalInfo().controls.email.setValue(progress.info.email);
         this.userPersonalInfo().controls.phone.setValue(progress.info.phone);
@@ -41,42 +60,32 @@ export class AppstoreService {
     });
   }
 
-  router = inject(Router);
+  private _selected = SELECTIONS.INFO;
+  set selected(selection: (typeof SELECTIONS)[keyof typeof SELECTIONS]) {
+    // Dispatch to store
+    this.store.dispatch(setSelectedPageNumber({ selected: selection }));
+  }
+  get selected() {
+    return this._selected;
+  }
 
-  isAboutLeavingPage = false;
+  _planCategory: 'arcade' | 'advanced' | 'pro' = 'arcade';
+  set planCategory(category: 'arcade' | 'advanced' | 'pro') {
+    // Dispatch to store
+    this.store.dispatch(setPlanCategory({ category }));
+  }
+  get planCategory() {
+    return this._planCategory;
+  }
 
-  SELECTIONS = SELECTIONS;
-  PATHNAMES = PATHNAMES;
-  selected = SELECTIONS.INFO;
-  planCategory: 'arcade' | 'advanced' | 'pro' = 'arcade';
-  planType: 'yearly' | 'monthly' = 'monthly';
-  detailsConfirmed = false;
-
-  prices = {
-    monthly: { arcade: 9, advanced: 12, pro: 15 },
-    yearly: { arcade: 90, advanced: 120, pro: 150 },
-  };
-
-  addons = [
-    {
-      title: 'Online service',
-      desc: 'Access to multiplayer games',
-      price: 1,
-      selected: false,
-    },
-    {
-      title: 'Larger storage',
-      desc: 'Extra 1TB of cloud save',
-      price: 2,
-      selected: false,
-    },
-    {
-      title: 'Customizable profile',
-      desc: 'Custom theme on your profile',
-      price: 2,
-      selected: false,
-    },
-  ];
+  _planType: 'yearly' | 'monthly' = 'monthly';
+  set planType(type: 'yearly' | 'monthly') {
+    //  Dispatch to store
+    this.store.dispatch(setPlanType({ planType: type }));
+  }
+  get planType() {
+    return this._planType;
+  }
 
   userPersonalInfo = signal(
     new FormGroup({
@@ -90,7 +99,7 @@ export class AppstoreService {
         Validators.email,
         Validators.minLength(3),
         Validators.maxLength(64),
-        Validators.pattern(/(\.[^\.]+)$/),
+        Validators.pattern(/(\.[^\.@][^@]+)$/),
       ]),
       phone: new FormControl('', [
         Validators.required,
@@ -103,6 +112,7 @@ export class AppstoreService {
 
   saveToLocalStorage() {
     const userinfo = this.userPersonalInfo().getRawValue();
+
     window.localStorage.setItem(
       'formdata',
       JSON.stringify({
@@ -115,6 +125,7 @@ export class AppstoreService {
         },
       })
     );
+
   }
 
   getSelectedPageNumber() {
@@ -122,21 +133,32 @@ export class AppstoreService {
     return this.PATHNAMES[url] || this.SELECTIONS.INFO;
   }
 
-  navigateTo(selection: typeof SELECTIONS[keyof typeof SELECTIONS], fromNavBar?: boolean) {
+  navigateTo(
+    selection: (typeof SELECTIONS)[keyof typeof SELECTIONS],
+    fromNavBar?: boolean
+  ) {
+
     const paths = Object.keys(this.PATHNAMES);
-    if(selection === SELECTIONS.PLAN){
+    if (selection === SELECTIONS.PLAN) {
+
       // Ensure all fields of form info is filled
       this.isAboutLeavingPage = true;
-      if(!fromNavBar&&this.formInfoHasErrors()) {
-        return;
+
+      if (!fromNavBar && this.formInfoHasErrors()) {
+        const isBackButtonPress = this.selected === SELECTIONS.ADDONS;
+        if(!isBackButtonPress){
+          return;
+        }
       }
+
     }
+
     this.selected = selection;
     this.saveToLocalStorage();
     this.router.navigate([paths[selection]]);
   }
 
-  formInfoHasErrors(){
+  formInfoHasErrors() {
     return this.userPersonalInfo().invalid;
   }
 }

@@ -1,7 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { AppStore, URLPathname } from "../services/appstore.service";
 
-interface BIGSTORE{
+export interface BIGSTORE{
   appdata: AppStore
 }
 
@@ -14,28 +14,28 @@ export const appStoreSelector = createSelector(
 );
 
 export const selectedPageSelector = createSelector(
-  storeSelector,
+  appStoreSelector,
   (state) => state.selected
 );
 
 export const planCategorySelector = createSelector(
-  storeSelector,
+  appStoreSelector,
   (state) => state.planCategory
 );
 
 export const planTypeSelector = createSelector(
-  storeSelector,
+  appStoreSelector,
   (state) => state.planType
 );
 
 
 export const addonsSelector = createSelector(
-  storeSelector,
+  appStoreSelector,
   (state) => state.addons
 )
 
 
 export const pricesSelector = createSelector(
-  storeSelector,
+  appStoreSelector,
   (state) => state.prices
 )

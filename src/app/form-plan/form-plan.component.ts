@@ -7,40 +7,44 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './form-plan.component.html',
-  styleUrl: './form-plan.component.css'
+  styleUrl: './form-plan.component.css',
 })
-export class FormPlanComponent implements OnInit{
+export class FormPlanComponent implements OnInit {
+
+  appStoreService = inject(AppstoreService);
+
   ngOnInit(): void {
     this.appStoreService.selected = 2;
   }
 
-  appStoreService = inject(AppstoreService)
-
-  get prices(){
-    return this.appStoreService.prices
+  get prices() {
+    return this.appStoreService.prices;
   }
 
-  //Methods
-  onToggle(){
-    const {planType} = this.appStoreService
-    this.appStoreService.planType = planType === 'monthly'?'yearly':'monthly'
-    this.appStoreService.saveToLocalStorage()
+  onToggle() {
+    const { planType } = this.appStoreService;
+    this.appStoreService.planType =
+      planType === 'monthly' ? 'yearly' : 'monthly';
+    this.appStoreService.saveToLocalStorage();
   }
 
-  onCategoryClick(planCategory:'arcade'|'advanced'|'pro'){
-    this.appStoreService.planCategory = planCategory
-    this.appStoreService.saveToLocalStorage()
+  onCategoryClick(planCategory: 'arcade' | 'advanced' | 'pro') {
+    this.appStoreService.planCategory = planCategory;
+    this.appStoreService.saveToLocalStorage();
   }
 
-  onItemClickedWithKeyboard(e: KeyboardEvent, planCategory:'arcade'|'advanced'|'pro'){
-    if(e.key.toLowerCase()==='enter'){
-      this.onCategoryClick(planCategory)
+  onItemClickedWithKeyboard(
+    e: KeyboardEvent,
+    planCategory: 'arcade' | 'advanced' | 'pro'
+  ) {
+    if (e.key.toLowerCase() === 'enter') {
+      this.onCategoryClick(planCategory);
     }
   }
 
-  onItemToggledWithKeyboard(e: KeyboardEvent){
-    if(e.key.toLowerCase()==='enter'){
-      this.onToggle()
+  onItemToggledWithKeyboard(e: KeyboardEvent) {
+    if (e.key.toLowerCase() === 'enter') {
+      this.onToggle();
     }
   }
 }
